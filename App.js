@@ -5,9 +5,10 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Course from './components/screens/Course';
 import CourseDetail from './components/screens/CourseDetail';
-import { ScreenStackHeaderCenterView } from 'react-native-screens';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 import Navbar from './components/screens/Navbar';
+import CourseVideo from './components/screens/CourseVideo';
+import TopCourses from './components/screens/TopCourses';
+import Profile from './components/screens/Profile';
 
 export default function App() {
 
@@ -19,8 +20,14 @@ export default function App() {
   }}>
         <Stack.Screen name='Home' component={Home} />
         <Stack.Screen name='Courses' component={Course} options={{ headerTitleAlign:'center' }}/>
+        <Stack.Screen name='TopCourses' component={TopCourses} options={{ headerTitleAlign:'center' }}/>
         <Stack.Screen name='CourseDetails' component={CourseDetail} options={{ title: 'Course Name',headerTitleAlign:'center'}} /> 
-         {/* pass the parameters remaining*/}
+        <Stack.Screen name='CourseVideo' component={CourseVideo} options={
+          ({ route }) => ({ title: route.params.name,
+            headerShown:true }) } /> 
+            <Stack.Screen name='Profile' component={Profile}
+             options={{headerShown:true,headerTitleAlign:'center'}}
+              />
       </Stack.Navigator>
       <Navbar />
     </NavigationContainer>

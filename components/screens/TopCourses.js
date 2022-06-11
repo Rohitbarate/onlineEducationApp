@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
-import courses from '../api/coursesApi'
+import courses from '../api/topCourses'
 
 const Course = ({ navigation }) => {
 
@@ -30,7 +30,7 @@ const Course = ({ navigation }) => {
     return (
         <View style={styles.container}>
             <View style={styles.header}>
-                <Text style={{ alignSelf: 'center', fontSize: 28, }}>Our Courses</Text>
+                <Text style={{ alignSelf: 'center', fontSize: 28, }}>Our Best Courses</Text>
                 <View style={{ borderBottomColor: '#000', borderBottomWidth: 1, width: '100%', marginTop: 5 }} />
             </View>
             <FlatList style={styles.flatList}
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     },
     courseBox: {
         width: '90%',
-        backgroundColor: '#e5d5c7',
+        backgroundColor: '#bbb2ed',
         borderRadius: 10,
         padding: 10,
         marginBottom: 20,
@@ -91,9 +91,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         height: '50%',
         paddingTop: 10,
-        // shadowColor:'#000b',
-        // shadowOpacity:10,
-        // shadowOffset:10
     },
     courseName: {
         fontSize: 26,

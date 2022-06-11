@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity , Image} from 'react-native'
 import React from 'react'
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,20 +7,27 @@ const Navbar = () => {
     return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.button} 
-            onPress={()=>{navigation.navigate('Home')}} 
-             >
+            onPress={()=>{navigation.navigate('Home')}}  >
+             <Image source={ require('../../assets/home.png')} 
+             style={styles.icon}  />
                 <Text style={styles.buttonText}>Home</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button} 
              onPress={()=>{navigation.navigate('Courses')}}
              >
+             <Image source={ require('../../assets/book.png')}style={styles.icon} />
                 <Text style={styles.buttonText}>Courses</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>Certificates</Text>
+            <Image source={ require('../../assets/downloads.png')} style={{height:25,width:25,marginBottom:4}}/>
+                <Text style={styles.buttonText}>Downloads</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.button}>
-                <Text style={styles.buttonText}>User</Text>
+            <TouchableOpacity style={styles.button} 
+              onPress={()=>{navigation.navigate('Profile')}}
+             >
+            <Image source={ require('../../assets/profile.png')}
+            style={styles.icon} />
+                <Text style={styles.buttonText}>Profile</Text>
             </TouchableOpacity>
         </View>
     )
@@ -35,5 +42,17 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems:'center',
         justifyContent:'space-around'
+    },
+    button:{
+display:'flex',
+alignItems:'center',
+
+    },
+    icon:{
+        height:30,
+        width:30
+    },
+    buttonText:{
+        fontWeight:'700'
     }
 })

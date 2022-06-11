@@ -1,6 +1,8 @@
 import React from 'react'
 import { Image, View, Text, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
 import topCourses from '../api/topCourses';
+import courseTypes from '../api/courseTypes';
+import { Video } from 'expo-av';
 
 const Home = ({ navigation }) => {
 
@@ -16,17 +18,43 @@ const Home = ({ navigation }) => {
       </View>
     )
   }
+
+  const courseType = ({item})=>{
+    return <Text style={{alignSelf:'center',marginHorizontal:10,backgroundColor:item.color,borderRadius:10,display:'flex',justifyContent:'center',paddingVertical:15,paddingHorizontal:20,fontWeight:'800',letterSpacing:1,color:'#fff'}}>{item.name}</Text>
+  }
+
   return (
     <View style={styles.container}>
-      <View style={styles.header}>
+      <View style={{ display: 'flex', alignItems: 'flex-start', width: '100%', paddingLeft: 20, marginBottom: 5 }}>
         <Text style={[styles.headerText, { fontSize: 18 }]}>Welcome,</Text>
-        <Text style={{ fontSize: 32, color: '#f57608' }}>Rohit Barate</Text>
-        <Image source={{ uri: 'https://cdn3d.iconscout.com/3d/premium/thumb/education-application-4805420-4002559.png' }}
+        <Text style={{ fontSize: 32, color: '#f57608', paddingLeft: 10 }}>Rohit Barate</Text>
+      </View>
+      <View style={styles.header}>
+        <Video
           style={styles.banner}
+          source={{
+            uri: 'https://cdnl.iconscout.com/lottie/premium/thumb/online-education-3575818-2997699.mp4',
+          }}
+          resizeMode="contain"
+          isLooping
+          shouldPlay
+
         />
       </View>
       <View style={styles.topCourseContainer}>
-        <Text style={styles.topCourseHeading}>Our Top Courses </Text>
+      <FlatList
+          data={courseTypes}
+          renderItem={courseType}
+          keyExtractor={item => item.id}
+          horizontal={true}
+        />
+        <View style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', width: '90%', marginTop: 10, }}>
+          <Text style={styles.topCourseHeading}>Our Best Courses </Text>
+          <TouchableOpacity onPress={() => navigation.navigate('TopCourses')}
+            style={{}} >
+            <Text style={styles.topCourseSubheading}>See All </Text>
+          </TouchableOpacity>
+        </View>
         <FlatList
           style={styles.FlatList}
           data={topCourses}
@@ -37,8 +65,7 @@ const Home = ({ navigation }) => {
       </View>
       <TouchableOpacity onPress={() => navigation.navigate('Courses')}
         style={styles.button}
-      >
-        <Text style={styles.buttonText}>Start Learning</Text>
+      ><Text style={styles.buttonText}>Start Learning</Text>
       </TouchableOpacity>
     </View>
   )
@@ -53,7 +80,7 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    justifyContent: 'space-evenly',
     paddingTop: 40,
     paddingBottom: 20
   },
@@ -62,38 +89,42 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start'
   },
   banner: {
-    width: 300,
-    height: 300,
-    marginTop: 30,
+    width: 500,
+    height: 240,
+    marginTop: 10
   },
   button: {
-    backgroundColor: '#f5760882',
+    backgroundColor: '#e76015',
     paddingVertical: 10,
-    paddingHorizontal: 30,
+    paddingHorizontal: 20,
     borderRadius: 10
   },
   buttonText: {
-    fontSize: 26
+    fontSize: 24
   },
   FlatList: {
     height: '40%',
-    marginTop: 20
+    marginTop: 10
   },
   topCourseContainer: {
     width: '100%',
-    display:'flex',
-    alignItems:'center',
-    textAlign:'center'
+    display: 'flex',
+    alignItems: 'center',
+    textAlign: 'center',
+    marginTop: 10
   },
   topCourseHeading: {
-    fontSize: 26,
+    fontSize: 22,
     fontWeight: '600',
-    marginTop: 10,
-    letterSpacing: 2,
-    
+    letterSpacing: 1,
+  },
+  topCourseSubheading: {
+    fontSize: 16,
+    fontWeight: '100',
+    color: '#000b'
   },
   courseBox: {
-    height: 200,
+    height: 150,
     width: 200,
     display: 'flex',
     flexDirection: 'column',
@@ -106,7 +137,7 @@ const styles = StyleSheet.create({
 
   },
   courseImg: {
-    width: '80%',
+    width: '60%',
     height: undefined,
     aspectRatio: 1
   },
